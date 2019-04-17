@@ -4,7 +4,7 @@ import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 import './pages/login.dart';
 import 'package:scoped_model/scoped_model.dart';
 import './scoped-models/main_model.dart';
-
+import './pages/todo_create.dart';
 class MyApp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -36,6 +36,9 @@ class MyAppState extends State<MyApp> {
           switch (settings.name) {
             case '/login':
               return MaterialPageRoute(builder: (context) => LoginPage());
+              break;
+            case '/todoCreate':
+              return MaterialPageRoute(builder: (context) => TodoCreate());
               break;
             default:
               return MaterialPageRoute(builder: (context) => HomePage());
