@@ -1,6 +1,5 @@
 import 'package:http/http.dart' as http;
 import '../models/user.dart';
-import '../scoped-models/main_model.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/authentication.dart';
@@ -27,7 +26,7 @@ mixin UserModel on ConnectedTasksModel {
     http.Response response;
     if (mode == LoginMode.Login) {
       response = await http.post(
-        'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyCl9u1aR4bpp9twU8YGsLhmnd6Oqs5yOOk',
+        'https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=AIzaSyCNFfkWcrhAX_5f87G7z0XuOvmZ6qRd2UU',
         body: json.encode(authData),
         headers: {
           'Content-Type': 'application/json',
@@ -35,7 +34,7 @@ mixin UserModel on ConnectedTasksModel {
       );
     } else {
       response = await http.post(
-        'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyCl9u1aR4bpp9twU8YGsLhmnd6Oqs5yOOk',
+        'https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=AIzaSyCNFfkWcrhAX_5f87G7z0XuOvmZ6qRd2UU',
         body: json.encode(authData),
         // we have to explicitly say where we are sending this encoded data to
         headers: {
