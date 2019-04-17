@@ -1,28 +1,65 @@
 import 'package:flutter/material.dart';
+import './pages/homepage.dart';
+import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    FlutterStatusbarcolor.setStatusBarColor(Colors.pink[600]);
     return MaterialApp(
       title: 'TodoList',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          child: Icon(
-            Icons.add,
-          ),
-        ),
-        appBar: AppBar(
-          title: Text('TodoList'),
-        ),
-        body: Container(
-          color: Colors.blue,
-        ),
-      ),
+      theme: _kTodoTheme,
+      debugShowCheckedModeBanner: false,
+      home: HomePage(),
     );
   }
+}
+
+final ThemeData _kTodoTheme = _buildTodoTheme();
+
+TextTheme _buildTodoTextTheme(TextTheme base) {
+  return base
+      .copyWith(
+        headline: base.headline.copyWith(
+          fontWeight: FontWeight.w500,
+        ),
+        title: base.title.copyWith(fontSize: 18.0),
+        caption: base.caption.copyWith(
+          fontWeight: FontWeight.w400,
+          fontSize: 14.0,
+        ),
+      )
+      .apply(
+        fontFamily: 'Nunito',
+        displayColor: Colors.black,
+        bodyColor: Colors.black,
+      );
+}
+
+ThemeData _buildTodoTheme() {
+  final ThemeData base = ThemeData.light();
+  return base.copyWith(
+      pageTransitionsTheme: PageTransitionsTheme(
+        builders: {
+          TargetPlatform.android: OpenUpwardsPageTransitionsBuilder(),
+          TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+        },
+      ),
+      accentColor: Colors.pink[500],
+      primaryColor: Colors.amber[300],
+      buttonTheme: base.buttonTheme.copyWith(
+        buttonColor: Colors.indigo[400],
+        textTheme: ButtonTextTheme.normal,
+      ),
+      scaffoldBackgroundColor: Colors.white,
+      cardColor: Colors.white,
+      textSelectionColor: Colors.pink[500],
+      errorColor: Colors.red,
+      textTheme: _buildTodoTextTheme(base.textTheme),
+      primaryTextTheme: _buildTodoTextTheme(base.primaryTextTheme),
+      accentTextTheme: _buildTodoTextTheme(base.accentTextTheme),
+      primaryIconTheme: base.iconTheme.copyWith(
+        color: Colors.black,
+      ));
 }
