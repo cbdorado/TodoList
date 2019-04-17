@@ -1,17 +1,47 @@
 import 'package:flutter/material.dart';
 import './pages/homepage.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
+import './pages/login.dart';
+import 'package:scoped_model/scoped_model.dart';
+import './scoped-models/main_model.dart';
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return MyAppState();
+  }
+}
+
+class MyAppState extends State<MyApp> {
+  final MainModel _model = MainModel();
+  @override
+  void initState() {
+    super.initState();
+  }
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     FlutterStatusbarcolor.setStatusBarColor(Colors.pink[600]);
-    return MaterialApp(
-      title: 'TodoList',
-      theme: _kTodoTheme,
-      debugShowCheckedModeBanner: false,
-      home: HomePage(),
+    return ScopedModel<MainModel>(
+      model: _model,
+      child: MaterialApp(
+        title: 'TodoList',
+        theme: _kTodoTheme,
+        initialRoute: '/login',
+        debugShowCheckedModeBanner: false,
+        home: HomePage(),
+        onGenerateRoute: (RouteSettings settings) {
+          switch (settings.name) {
+            case '/login':
+              return MaterialPageRoute(builder: (context) => LoginPage());
+              break;
+            default:
+              return MaterialPageRoute(builder: (context) => HomePage());
+          }
+        },
+      ),
     );
   }
 }
