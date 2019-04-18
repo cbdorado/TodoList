@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './category_picker.dart';
 import './schedule_page.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -10,19 +11,20 @@ class HomePage extends StatelessWidget {
       length: 2,
       child: Scaffold(
         bottomNavigationBar: BottomAppBar(
-          color: Colors.amber[300],
+          color: Colors.indigo[400],
           child: TabBar(
+            indicatorColor: Colors.pink[600],
             tabs: <Widget>[
               Tab(
                 icon: Icon(
-                  Icons.edit,
-                  color: Colors.indigo[400],
+                  FontAwesomeIcons.tasks,
+                  color: Colors.white,
                 ),
               ),
               Tab(
                 icon: Icon(
-                  Icons.schedule,
-                  color: Colors.indigo[400],
+                  Icons.edit,
+                  color: Colors.white,
                 ),
               ),
             ],
@@ -30,8 +32,8 @@ class HomePage extends StatelessWidget {
         ),
         body: TabBarView(
           children: <Widget>[
-            CategoryPicker(),
             SchedulePage(),
+            CategoryPicker(),
           ],
         ),
       ),
