@@ -42,6 +42,7 @@ class MyAppState extends State<MyApp> {
               break;
             default:
               return MaterialPageRoute(builder: (context) => HomePage());
+              break;
           }
         },
       ),

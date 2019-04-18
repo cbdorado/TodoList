@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../models/todo.dart';
+import '../pages/todo_create.dart';
 
 class CategoryPicker extends StatelessWidget {
+  CategoryPicker({Key key}) : super(key: key);
+  Map<String, dynamic> formData;
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -10,7 +14,7 @@ class CategoryPicker extends StatelessWidget {
         color: Colors.amber[300],
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 25),
-          child: Column(
+          child: ListView(
             children: <Widget>[
               SizedBox(
                 height: 50.0,
@@ -39,7 +43,20 @@ class CategoryPicker extends StatelessWidget {
                         'Work',
                         style: TextStyle(color: Colors.white),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        return Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TodoCreate(
+                                  data: formData = {
+                                    'task': 'Work',
+                                    'title': null,
+                                    'description': null,
+                                  },
+                                ),
+                          ),
+                        );
+                      },
                     ),
                   ),
                   SizedBox(
@@ -59,7 +76,20 @@ class CategoryPicker extends StatelessWidget {
                         'Exercise',
                         style: TextStyle(color: Colors.white),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        return Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TodoCreate(
+                                  data: formData = {
+                                    'task': 'Exercise',
+                                    'title': null,
+                                    'description': null,
+                                  },
+                                ),
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ],
@@ -83,7 +113,20 @@ class CategoryPicker extends StatelessWidget {
                         'Eat',
                         style: TextStyle(color: Colors.white),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        return Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TodoCreate(
+                                  data: formData = {
+                                    'task': 'Eat',
+                                    'title': null,
+                                    'description': null,
+                                  },
+                                ),
+                          ),
+                        );
+                      },
                     ),
                   ),
                   SizedBox(
@@ -103,7 +146,20 @@ class CategoryPicker extends StatelessWidget {
                         'Rest',
                         style: TextStyle(color: Colors.white),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        return Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TodoCreate(
+                                  data: formData = {
+                                    'task': 'Rest',
+                                    'title': null,
+                                    'description': null,
+                                  },
+                                ),
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ],
@@ -127,7 +183,20 @@ class CategoryPicker extends StatelessWidget {
                         'Mindfulness',
                         style: TextStyle(color: Colors.white),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        return Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TodoCreate(
+                                  data: formData = {
+                                    'task': 'Mindfulness',
+                                    'title': null,
+                                    'description': null,
+                                  },
+                                ),
+                          ),
+                        );
+                      },
                     ),
                   ),
                   SizedBox(
@@ -147,7 +216,20 @@ class CategoryPicker extends StatelessWidget {
                         'Groceries',
                         style: TextStyle(color: Colors.white),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        return Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TodoCreate(
+                                  data: formData = {
+                                    'task': 'Groceries',
+                                    'title': null,
+                                    'description': null,
+                                  },
+                                ),
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ],
@@ -171,7 +253,20 @@ class CategoryPicker extends StatelessWidget {
                         'Social',
                         style: TextStyle(color: Colors.white),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        return Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TodoCreate(
+                                  data: formData = {
+                                    'task': 'Social',
+                                    'title': null,
+                                    'description': null,
+                                  },
+                                ),
+                          ),
+                        );
+                      },
                     ),
                   ),
                   SizedBox(
@@ -191,7 +286,20 @@ class CategoryPicker extends StatelessWidget {
                         'Self-Care',
                         style: TextStyle(color: Colors.white),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        return Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TodoCreate(
+                                  data: formData = {
+                                    'task': 'Self-Care',
+                                    'title': null,
+                                    'description': null,
+                                  },
+                                ),
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ],
@@ -215,7 +323,20 @@ class CategoryPicker extends StatelessWidget {
                         'Other',
                         style: TextStyle(color: Colors.white),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        return Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TodoCreate(
+                                  data: formData = {
+                                    'task': 'Other',
+                                    'title': null,
+                                    'description': null,
+                                  },
+                                ),
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ],

@@ -3,6 +3,7 @@ import 'package:scoped_model/scoped_model.dart';
 import '../scoped-models/main_model.dart';
 import '../models/authentication.dart';
 import '../pages/homepage.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -70,7 +71,7 @@ class _LoginPageState extends State<LoginPage> {
     successInformation = await authenticate(
         _formData['email'], _formData['password'], _loginMode);
     if (successInformation['success']) {
-      Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+      Navigator.pop(context);
     } else {
       showDialog(
         context: context,
@@ -98,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-      backgroundColor: Colors.indigo,
+      backgroundColor: Colors.amber[500],
       body: SafeArea(
         child: Form(
           key: _formKey,
@@ -109,9 +110,9 @@ class _LoginPageState extends State<LoginPage> {
               Column(
                 children: <Widget>[
                   Icon(
-                    Icons.dashboard,
+                    FontAwesomeIcons.tasks,
                     size: 50.0,
-                    color: Colors.yellow,
+                    color: Colors.indigo[300],
                   ),
                   SizedBox(
                     height: 16.0,
@@ -119,7 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                   Text(
                     "OnTime",
                     style: TextStyle(
-                        fontSize: 32, color: Colors.yellowAccent[700]),
+                        fontSize: 32, color: Colors.indigo[300]),
                   ),
                 ],
               ),
@@ -160,7 +161,7 @@ class _LoginPageState extends State<LoginPage> {
               FlatButton(
                 child: Text(
                   'Switch to ${_loginMode == LoginMode.Login ? 'Signup' : 'Login'}',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.black),
                 ),
                 onPressed: () {
                   setState(() {
@@ -176,7 +177,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Text(
                       'CANCEL',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                     ),
                     onPressed: () {
@@ -187,11 +188,12 @@ class _LoginPageState extends State<LoginPage> {
                   ScopedModelDescendant<MainModel>(
                     builder:
                         (BuildContext context, Widget child, MainModel model) {
-                      return FlatButton(
-                        child: Text(
+                      return InputChip(
+                        backgroundColor: Colors.pink[600],
+                        label: Text(
                           'NEXT',
                           style: TextStyle(
-                            color: Colors.yellowAccent[700],
+                            color: Colors.white,
                           ),
                         ),
                         onPressed: () {
