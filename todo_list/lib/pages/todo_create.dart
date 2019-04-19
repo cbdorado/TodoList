@@ -43,7 +43,7 @@ class TodoCreateState extends State<TodoCreate> {
   Widget _buildDescriptionTextField(Todo todo) {
     return TextFormField(
       focusNode: _todoDescription,
-      initialValue: todo == null ? '' : todo.title,
+      initialValue: todo == null ? '' : todo.description,
       decoration: InputDecoration(
           labelText: 'Todo description', border: OutlineInputBorder()),
       onSaved: (String value) {
@@ -94,10 +94,12 @@ class TodoCreateState extends State<TodoCreate> {
         widget.data['task'],
         widget.data['title'],
         widget.data['description'],
-      ).then(
-        (_) => setSelectedTodo(null),
-        Navigator.pop(context),
-      );
+      ).then((bool success) {
+        if (success == true) {
+          setSelectedTodo(null);
+          Navigator.pop(context);
+        }
+      });
     }
   }
 
@@ -131,6 +133,7 @@ class TodoCreateState extends State<TodoCreate> {
           onWillPop: () {
             model.selectTodo(null);
             Navigator.pop(context, false);
+            return Future.value(false);
           },
           child: Material(
               child: Scaffold(
@@ -138,7 +141,9 @@ class TodoCreateState extends State<TodoCreate> {
               backgroundColor: Colors.white,
               title: Text(
                 '${widget.data['task']}',
-                style: TextStyle(fontWeight: FontWeight.bold,),
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               elevation: 0.0,
               centerTitle: true,

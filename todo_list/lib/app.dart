@@ -5,6 +5,7 @@ import './pages/login.dart';
 import 'package:scoped_model/scoped_model.dart';
 import './scoped-models/main_model.dart';
 import './pages/todo_create.dart';
+
 class MyApp extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -29,19 +30,15 @@ class MyAppState extends State<MyApp> {
       child: MaterialApp(
         title: 'TodoList',
         theme: _kTodoTheme,
-        initialRoute: '/login',
         debugShowCheckedModeBanner: false,
-        home: HomePage(),
+        home: LoginPage(_model),
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
-            case '/login':
-              return MaterialPageRoute(builder: (context) => LoginPage());
-              break;
             case '/todoCreate':
               return MaterialPageRoute(builder: (context) => TodoCreate());
               break;
             default:
-              return MaterialPageRoute(builder: (context) => HomePage());
+              return MaterialPageRoute(builder: (context) => LoginPage(_model));
               break;
           }
         },

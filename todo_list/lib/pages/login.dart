@@ -6,6 +6,8 @@ import '../pages/homepage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class LoginPage extends StatefulWidget {
+  final MainModel model;
+  LoginPage(this.model);
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -16,6 +18,8 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
+
+  LoginPage get widget => super.widget;
 
   final Map<String, dynamic> _formData = {
     'email': null,
@@ -71,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
     successInformation = await authenticate(
         _formData['email'], _formData['password'], _loginMode);
     if (successInformation['success']) {
-      Navigator.pop(context);
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> HomePage(widget.model)));
     } else {
       showDialog(
         context: context,

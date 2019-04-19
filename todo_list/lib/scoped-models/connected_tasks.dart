@@ -126,12 +126,12 @@ mixin TodosModel on ConnectedTodosModel {
             'https://todolist-a943a.firebaseio.com/${_authenticatedUser.id}/todos.json?auth=${_authenticatedUser.token}')
         .then<Null>((http.Response response) {
       List<Todo> fetchedTodos = [];
-      final Map<String, dynamic> todoData = json.decode(response.body);
+      final Map<String, dynamic> todoListData = json.decode(response.body);
       if (fetchedTodos == null) {
         notifyListeners();
         return;
       }
-      todoData.forEach((String todoId, dynamic todoData) {
+      todoListData.forEach((String todoId, dynamic todoData) {
         final Todo todo = Todo(
           id: todoId,
           task: todoData['task'],
@@ -143,10 +143,11 @@ mixin TodosModel on ConnectedTodosModel {
         fetchedTodos.add(todo);
       });
       _todos = fetchedTodos;
+
       notifyListeners();
       _selTodoId = null;
-    }).catchError((err) {
-      return 'Error has occured!';
+    }).catchError((error) {
+      return;
     });
   }
 
@@ -202,6 +203,7 @@ mixin UserModel on ConnectedTodosModel {
         email: email,
         token: responseData['idToken'],
       );
+      print(_authenticatedUser.id);
 
       // gets access to shared preferences to store user token
       final SharedPreferences prefs = await SharedPreferences.getInstance();
