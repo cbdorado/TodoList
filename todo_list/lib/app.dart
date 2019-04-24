@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import './pages/homepage.dart';
 import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 import './pages/login.dart';
 import 'package:scoped_model/scoped_model.dart';
@@ -7,14 +6,16 @@ import './scoped-models/main_model.dart';
 import './pages/todo_create.dart';
 
 class MyApp extends StatefulWidget {
+  // creates a MyAppState object when UI changes occur
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return MyAppState();
+    return _MyAppState();
   }
 }
 
-class MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyApp> {
+  // initialize Model to pass down data to descendant widgets
   final MainModel _model = MainModel();
   @override
   void initState() {
@@ -25,13 +26,16 @@ class MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     FlutterStatusbarcolor.setStatusBarColor(Colors.pink[600]);
+    // return a MaterialApp Widget wrapped in the Scoped Model
     return ScopedModel<MainModel>(
       model: _model,
       child: MaterialApp(
         title: 'TodoList',
         theme: _kTodoTheme,
         debugShowCheckedModeBanner: false,
+        // home page is login page
         home: LoginPage(_model),
+        // creating named routes 
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
             case '/todoCreate':

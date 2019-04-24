@@ -16,19 +16,26 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  // username and password controller to connect with cancel button for clearing text in form
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
 
+  // accesses the Stateful Widget's attributes
   LoginPage get widget => super.widget;
 
+  // creating a map for the formData
   final Map<String, dynamic> _formData = {
     'email': null,
     'password': null,
   };
 
+  // creating a global key of type FormState to validate and track inputted email and password
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  // LoginMode enum to switch between signup and login
   LoginMode _loginMode = LoginMode.Login;
 
+  // builds the password form field widget, obscures the
+  // text and validates if the String value is empty or less that 6
   Widget _passwordFormField() {
     return TextFormField(
       controller: _passwordController,
@@ -43,12 +50,14 @@ class _LoginPageState extends State<LoginPage> {
           return 'Password invalid';
         }
       },
+      // saves the value to the form data map
       onSaved: (String value) {
         _formData['password'] = value;
       },
     );
   }
 
+  // builds password confirmation form field when signing up
   Widget _confirmPasswordFormField() {
     return TextFormField(
       decoration: InputDecoration(
@@ -57,6 +66,7 @@ class _LoginPageState extends State<LoginPage> {
         labelText: "Confirm Password",
       ),
       obscureText: true,
+      // validates whether the text connected to the controller is equal to the inputted String value
       validator: (String value) {
         if (_passwordController.text != value) {
           return 'Passwords do not match';
@@ -65,6 +75,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  // authenticates the user
   void _submitForm(Function authenticate) async {
     if (!_formKey.currentState.validate()) {
       return;
@@ -75,7 +86,8 @@ class _LoginPageState extends State<LoginPage> {
     successInformation = await authenticate(
         _formData['email'], _formData['password'], _loginMode);
     if (successInformation['success']) {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> HomePage(widget.model)));
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) => HomePage(widget.model)));
     } else {
       showDialog(
         context: context,
@@ -107,6 +119,7 @@ class _LoginPageState extends State<LoginPage> {
       body: SafeArea(
         child: Form(
           key: _formKey,
+          // ListView wraps around email form field and password form field
           child: ListView(
             padding: EdgeInsets.symmetric(horizontal: 24.0),
             children: <Widget>[
@@ -123,8 +136,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   Text(
                     "OnTime",
-                    style: TextStyle(
-                        fontSize: 32, color: Colors.indigo[300]),
+                    style: TextStyle(fontSize: 32, color: Colors.indigo[300]),
                   ),
                 ],
               ),
@@ -162,17 +174,21 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 height: 10.0,
               ),
+              // button switches login modes
               FlatButton(
                 child: Text(
                   'Switch to ${_loginMode == LoginMode.Login ? 'Signup' : 'Login'}',
                   style: TextStyle(color: Colors.black),
                 ),
+                // setState method rebuilds UI after next frame when build is called again
                 onPressed: () {
-                  setState(() {
-                    _loginMode = _loginMode == LoginMode.Login
-                        ? LoginMode.Signup
-                        : LoginMode.Login;
-                  });
+                  setState(
+                    () {
+                      _loginMode = _loginMode == LoginMode.Login
+                          ? LoginMode.Signup
+                          : LoginMode.Login;
+                    },
+                  );
                 },
               ),
               ButtonBar(
@@ -184,6 +200,7 @@ class _LoginPageState extends State<LoginPage> {
                         color: Colors.black,
                       ),
                     ),
+                    // if the flat button is pressed, then the text for the email and password will clear
                     onPressed: () {
                       _usernameController.clear();
                       _passwordController.clear();

@@ -11,15 +11,17 @@ class TodoCreate extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return TodoCreateState();
+    return _TodoCreateState();
   }
 }
 
-class TodoCreateState extends State<TodoCreate> {
+class _TodoCreateState extends State<TodoCreate> {
+  // initializes a form key to save and validate the title and description
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final _todoTitle = FocusNode();
   final _todoDescription = FocusNode();
 
+  // used to access the Stateful Widget's attributes
   @override
   TodoCreate get widget => super.widget;
 
@@ -31,9 +33,11 @@ class TodoCreateState extends State<TodoCreate> {
   Widget _buildTitleTextField(Todo todo) {
     return TextFormField(
       focusNode: _todoTitle,
+      // ternary operator that checks if the todo object is null, else replace with the todo.title
       initialValue: todo == null ? '' : todo.title,
       decoration: InputDecoration(
           labelText: 'What do you have to do?', border: OutlineInputBorder()),
+      // onSaved parameter takes a function that saves title data
       onSaved: (String value) {
         widget.data['title'] = value;
       },
@@ -43,9 +47,11 @@ class TodoCreateState extends State<TodoCreate> {
   Widget _buildDescriptionTextField(Todo todo) {
     return TextFormField(
       focusNode: _todoDescription,
+      // ternary operator that checks if the todo object is null, else replace with the todo.description
       initialValue: todo == null ? '' : todo.description,
       decoration: InputDecoration(
           labelText: 'Todo description', border: OutlineInputBorder()),
+      // onSaved parameter takes a function that saves description data
       onSaved: (String value) {
         widget.data['description'] = value;
       },
@@ -53,13 +59,17 @@ class TodoCreateState extends State<TodoCreate> {
     );
   }
 
+  // submitForm function takes in three functions for adding, updating, and selecting todo
+  // [int selectedTodoIndex] is an optional parameter 
   void _submitForm(
       Function addTodo, Function updateTodo, Function setSelectedTodo,
       [int selectedTodoIndex]) {
+    // checks if the forms are not validated
     if (!_formKey.currentState.validate()) {
       return;
     }
     _formKey.currentState.save();
+    // checks if there is basically no selected index, add the todo
     if (selectedTodoIndex == -1) {
       addTodo(
         widget.data['task'],
@@ -103,6 +113,7 @@ class TodoCreateState extends State<TodoCreate> {
     }
   }
 
+  // 
   Widget _buildPageContent(BuildContext context, Todo todo) {
     return Container(
       margin: EdgeInsets.all(10.0),
