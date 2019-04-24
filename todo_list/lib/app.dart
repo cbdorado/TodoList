@@ -19,6 +19,7 @@ class _MyAppState extends State<MyApp> {
   final MainModel _model = MainModel();
   @override
   void initState() {
+    print("App Started");
     super.initState();
   }
 

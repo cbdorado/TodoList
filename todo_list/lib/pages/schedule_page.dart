@@ -25,8 +25,10 @@ class _SchedulePageState extends State<SchedulePage> {
 
   Widget _buildScheduleList(List<Todo> todos) {
     Widget scheduleList;
+    // Scoped Model to pass down data to descendant widgets
     return ScopedModelDescendant<MainModel>(
       builder: (BuildContext context, Widget child, MainModel model) {
+        // builds a list of dismissible widgets if the length of the todos list is greater than 0
         if (todos.length > 0) {
           scheduleList = ListView.builder(
             itemBuilder: (BuildContext context, int index) {
@@ -35,6 +37,7 @@ class _SchedulePageState extends State<SchedulePage> {
                   todos[index].title,
                 ),
                 onDismissed: (DismissDirection direction) {
+                  // if user swipes Todo left or right, the todo is deleted
                   if (direction == DismissDirection.startToEnd ||
                       direction == DismissDirection.endToStart) {
                     model.selectTodo(todos[index].id);
@@ -53,6 +56,7 @@ class _SchedulePageState extends State<SchedulePage> {
                       ),
                     ),
                   ),
+                  // if any of the todos are tapped, go into edit mode
                   onTap: () {
                     model.selectTodo(todos[index].id);
                     print(index);
