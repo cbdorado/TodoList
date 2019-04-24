@@ -10,11 +10,11 @@ class SchedulePage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
-    return SchedulePageState();
+    return _SchedulePageState();
   }
 }
 
-class SchedulePageState extends State<SchedulePage> {
+class _SchedulePageState extends State<SchedulePage> {
   @override
   SchedulePage get widget => super.widget;
   @override
@@ -91,7 +91,7 @@ class SchedulePageState extends State<SchedulePage> {
             appBar: AppBar(
               backgroundColor: Colors.pink[600],
               title: Text(
-                'SCHEDULE',
+                'TODOS',
                 style: TextStyle(fontSize: 25.0, color: Colors.white),
               ),
               elevation: 0.0,
