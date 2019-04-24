@@ -1,4 +1,5 @@
 import 'package:scoped_model/scoped_model.dart';
-class MainModel extends Model {
+import '../scoped-models/connected_tasks.dart';
+class MainModel extends Model with ConnectedTodosModel, TodosModel, UserModel{
   
 }
